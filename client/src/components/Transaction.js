@@ -4,6 +4,11 @@ import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { useDownloadExcel } from 'react-export-table-to-excel';
 const Transaction = () => {
+
+    const axiosInstance = axios.create({
+        baseURL:process.env.REACT_APP_API_URL
+    });
+
     let location = useLocation();
     const [partnerid,setPartnerid]=useState("")
     const [amount,setAmount]=useState()
@@ -27,7 +32,7 @@ const Transaction = () => {
     }
 
     const gettransactiondetail=async()=>{
-        const transdetail=await axios.get("http://localhost:3001/api/transactiondetails")
+        const transdetail=await axiosInstance.get("/transactiondetails")
         setTransdata(transdetail.data)
     }
 
@@ -38,7 +43,7 @@ const Transaction = () => {
     const transaction = async(e)=>{
         e.preventDefault();
         if(window.confirm(`Are You Sure That You Want To Continue The Following Transaction? ${"User ID : " + partnerid + " Amount : "+ amount}`)){
-        const trans= await axios.post("http://localhost:3001/api/transaction",{
+        const trans= await axiosInstance.post("/transaction",{
             partnerid:partnerid,
             amount:amount,
             date:date,

@@ -4,6 +4,11 @@ import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 
 const SignupForm = () => {
+
+    const axiosInstance = axios.create({
+        baseURL:process.env.REACT_APP_API_URL
+    });
+
     let navigate=useNavigate();
 
     const[partnerid,setPartnerid]=useState("")
@@ -58,7 +63,7 @@ const SignupForm = () => {
         }
     }
     useEffect(()=>{
-            axios.get("http://localhost:3001/api/lastid").then(res=>{
+            axiosInstance.get("/lastid").then(res=>{
                 setPartnerid(incrementID(res.data[0].partner_id));
             })
             setPassword("user"+tempdigit());
@@ -70,7 +75,7 @@ const SignupForm = () => {
         if(phone.length===10 && (sponsor.slice(0,2)==="AB" || sponsor.slice(0,2)==="ab") && name.length>3 && address.length>3)
         {
         navigate("/success",{state:{partnerid:partnerid,password:password}})
-        axios.post("http://localhost:3001/api/signup",{
+        axiosInstance.post("/signup",{
             partnerid:partnerid,
             password:password,
             name:name,

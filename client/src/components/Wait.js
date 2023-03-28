@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../assets/logo.png'
 import {useNavigate,useLocation} from 'react-router-dom'
-const Wait = (props) => {
+const Wait = () => {
     let navigate=useNavigate();
     let location=useLocation();
   return (

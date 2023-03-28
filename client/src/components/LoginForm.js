@@ -5,6 +5,11 @@ import axios from 'axios'
 
 
 const LoginForm = () => {
+
+    const axiosInstance = axios.create({
+        baseURL:process.env.REACT_APP_API_URL
+    });
+
     let navigate=useNavigate();
     const[username,setUsername]=useState("");
     const[password,setPassword]=useState("");
@@ -12,7 +17,7 @@ const LoginForm = () => {
 
     const login=async(e)=>{
         e.preventDefault();
-        axios.post("http://localhost:3001/api/login",{
+        axiosInstance.post("/login",{
             username:username,
             password:password,
         }).then((response)=>{

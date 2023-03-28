@@ -5,10 +5,10 @@ const mysql=require("mysql2")
 const cors=require("cors");
 
 const db= mysql.createPool({
-    host:"localhost",
-    user:"root",
-    password:"admin2245",
-    database:"amo_db"
+    host:process.env.HOST,
+    user:process.env.USER,
+    password:process.env.PASSWORD,
+    database:process.env.DATABASE,
 });
 
 app.get("/",(req,res)=>{

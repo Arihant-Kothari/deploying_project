@@ -4,6 +4,11 @@ import React,{useEffect,useState} from 'react'
 import logo from '../assets/logo.png'
 
 const EditForm = () => {
+
+    const axiosInstance = axios.create({
+        baseURL:process.env.REACT_APP_API_URL
+    });
+
     let location=useLocation();
     let navigate=useNavigate();
     const[name,setName]=useState(location.state.name)
@@ -16,7 +21,7 @@ const EditForm = () => {
         e.preventDefault();
         if(window.confirm("Are You Sure That You Want To Update The Details?")){
             navigate("/admin/dashboard",{state:{showdash:"admin"}})
-            const wait = await axios.post("http://localhost:3001/api/editform",{
+            const wait = await axiosInstance.post("/editform",{
                 name:name,
                 phone:phone,
                 address:address,
