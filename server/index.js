@@ -143,6 +143,6 @@ app.post('/api/gettransaction',(req,res)=>{
     })
 })
 
-app.listen(3001,()=>{
-    console.log("server is running on port 3001")
+app.listen(process.env.PORT,()=>{
+    console.log(`server is running on port ${port}`)
 })
