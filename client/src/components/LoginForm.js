@@ -6,9 +6,7 @@ import axios from 'axios'
 
 const LoginForm = () => {
 
-    const axiosInstance = axios.create({
-        baseURL:process.env.REACT_APP_API_URL
-    });
+    const baseURL=process.env.REACT_APP_API_URL
 
     let navigate=useNavigate();
     const[username,setUsername]=useState("");
@@ -17,7 +15,7 @@ const LoginForm = () => {
 
     const login=async(e)=>{
         e.preventDefault();
-        axiosInstance.post("/login",{
+        axios.post(baseURL+"/login",{
             username:username,
             password:password,
         }).then((response)=>{

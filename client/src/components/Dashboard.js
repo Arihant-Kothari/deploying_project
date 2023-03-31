@@ -6,9 +6,7 @@ import 'flowbite'
 
 const Dashboard = () => {
 
-  const axiosInstance = axios.create({
-    baseURL:process.env.REACT_APP_API_URL
-});
+   const baseURL=process.env.REACT_APP_API_URL
 
    let location=useLocation();
    let partnerid=location.state.partnerid.toUpperCase();
@@ -32,7 +30,7 @@ const Dashboard = () => {
    const[transaction,setTransaction]=useState([])
 
    const getUserDetail = async()=>{
-    const res =await axiosInstance.post("/userdetail",{
+    const res =await axios.post(baseURL+"/userdetail",{
          userid:partnerid
       }).then((result)=>{
          setName(result.data[0].name)
@@ -43,7 +41,7 @@ const Dashboard = () => {
    }
 
    const getdata=async()=>{
-    const response = await axiosInstance.get("/dashboard")
+    const response = await axios.get(baseURL+"/dashboard")
 
     //level1
     let level1idarr=[]
@@ -103,13 +101,13 @@ const Dashboard = () => {
    }
 
    const getreward=async()=>{
-      const result=await axiosInstance.post("/getreward",{
+      const result=await axios.post(baseURL+"/getreward",{
         partnerid:partnerid,
       })
       setReward(result.data)
    }
    const gettransaction=async()=>{
-    const result=await axiosInstance.post("/gettransaction",{
+    const result=await axios.post(baseURL+"/gettransaction",{
       partnerid:partnerid,
     })
     setTransaction(result.data)

@@ -5,9 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useDownloadExcel } from 'react-export-table-to-excel';
 const Reward = () => {
 
-    const axiosInstance = axios.create({
-        baseURL:process.env.REACT_APP_API_URL
-    });
+    const baseURL=process.env.REACT_APP_API_URL
 
     let location = useLocation();
     const [partnerid,setPartnerid]=useState("")
@@ -32,7 +30,7 @@ const Reward = () => {
     }
 
     const getrewarddetail=async()=>{
-        const rewarddetail=await axiosInstance.get("/rewarddetails")
+        const rewarddetail=await axios.get(baseURL+"/rewarddetails")
         setRewarddata(rewarddetail.data)
     }
 
@@ -45,7 +43,7 @@ const Reward = () => {
     const reward = async(e)=>{
         e.preventDefault();
         if(window.confirm(`Are You Sure That You Want To Continue The Following Transaction? ${"User ID : " + partnerid + " Amount : "+ amount}`)){
-        const trans= await axiosInstance.post("/reward",{
+        const trans= await axios.post(baseURL+"/reward",{
             partnerid:partnerid,
             amount:amount,
             date:date,

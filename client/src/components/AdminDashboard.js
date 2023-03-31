@@ -6,9 +6,7 @@ import { useDownloadExcel } from 'react-export-table-to-excel';
 
 const AdminDashboard = () => {
 
-    const axiosInstance = axios.create({
-        baseURL:process.env.REACT_APP_API_URL
-    });
+    const baseURL = process.env.REACT_APP_API_URL
 
     let navigate=useNavigate();
     let location=useLocation();
@@ -18,7 +16,7 @@ const AdminDashboard = () => {
     const dash=location.state.showdash
 
     const getdata= async ()=>{
-        const result= await axiosInstance.get("/admin/dashboard")
+        const result= await axios.get(baseURL+"/admin/dashboard")
         setData(result.data)
     }
     useEffect(()=>{
@@ -27,7 +25,7 @@ const AdminDashboard = () => {
 
     const deleteRow=async(id)=>{
         if(window.confirm("Are You Sure That You Want To Delete The Row?")){
-            const del = await axiosInstance.post("/deleterow",{
+            const del = await axios.post(baseURL+"/deleterow",{
                 id:id,
             })
             
