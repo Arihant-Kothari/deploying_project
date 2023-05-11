@@ -50,6 +50,15 @@ const Transaction = () => {
     }
     }
 
+    const deleteRow=async(index)=>{
+        if(window.confirm("Are You Sure That You Want To Delete The Transaction?")){
+            const del = await axios.post(baseURL+"/deletetransaction",{
+                index:index,
+            })
+            
+        }
+    }
+
     const tableRef = useRef(null);
     const { onDownload } = useDownloadExcel({
             currentTableRef: tableRef.current,
@@ -100,6 +109,8 @@ const Transaction = () => {
 				<th className="border text-md border-black px-5 py-3 bg-blue-200">AMOUNT</th>
                 <th className="border text-md border-black px-5 py-3 bg-blue-200">DESCRIPTION</th>
 				<th className="border text-md border-black px-5 py-3 bg-blue-200">DATE</th>
+                <th className="border text-md border-black px-5 py-3 bg-blue-200">DELETE</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -111,6 +122,13 @@ const Transaction = () => {
                         <td className='border text-md font-semibold border-black px-5 py-3 text-center'>{item.amount}</td>
                         <td className='border text-md font-semibold border-black px-5 py-3 text-center'>{item.remark}</td>
                         <td className='border text-md font-semibold border-black px-5 py-3 text-center'>{item.date.slice(8,10)+"/"+item.date.slice(5,7)+"/"+item.date.slice(0,4)}</td>
+                        <td className='border text-sm font-semibold border-black p-2'>
+                            <div className='flex justify-evenly'>
+                            <button onClick={()=>{
+                                deleteRow(item.index)
+                            }} type="button" title="Delete" className="text-white bg-red-600 hover:bg-red-800 font-medium text-xs p-2 rounded">D</button>
+                            </div>
+                        </td>
                     </tr>
                 )
             })}

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {useLocation} from 'react-router-dom'
+import {useLocation,useNavigate} from 'react-router-dom'
 import user from '../assets/user.png'
 import axios from 'axios'
 import 'flowbite'
@@ -9,6 +9,7 @@ const Dashboard = () => {
    const baseURL=process.env.REACT_APP_API_URL
 
    let location=useLocation();
+   let navigate=useNavigate();
    let partnerid=location.state.partnerid.toUpperCase();
 
    const[name,setName]=useState("")
@@ -53,7 +54,7 @@ const Dashboard = () => {
     setLevel1id(level1idarr)
     setLastjoining(daysCalculator(getCurrentDate(), level1idarr[level1idarr.length-1].date))
     setLastjoiningdate(level1idarr[level1idarr.length-1].date)
-    setIncomedate(level1idarr[1].date)
+    // setIncomedate(level1idarr[1].date)
 
     //level2
     let level2idarr=[]
@@ -185,6 +186,7 @@ const Dashboard = () => {
     }
   }
 
+  
   const getselfincome=()=>{
     if(level1<2){
       let selfincome=0
@@ -199,7 +201,18 @@ const Dashboard = () => {
     }
   }
   const selfincome=getselfincome()
-  const daily_total=daily_level1+daily_level2+daily_level3+daily_level4+daily_level5+selfincome
+
+  const getDaily=(temp)=>{
+    if (temp<20){
+      let x=0
+      return x
+    }
+    else{
+      return temp
+    }
+  }
+  let y=daily_level1+daily_level2+daily_level3+daily_level4+daily_level5+selfincome
+  let daily_total=getDaily(y)
 
   //reward
   const getrewardinfo=()=>{
@@ -241,39 +254,39 @@ const Dashboard = () => {
 
   let total_self=total_self_days*20
 
-
+  let todaydate=getCurrentDate()
   let level1days=0
   level1id.forEach((item,index)=>{
-    if(index>1){
-    level1days=level1days+daysCalculator(incomedate,item.date)
+    if(level1>1){
+    level1days=level1days+daysCalculator(todaydate,item.date)
     }
   })
 
   let level2days=0
   level2id.forEach((item,index)=>{
-    if(index>1){
-    level2days=level2days+daysCalculator(incomedate,item.date)
+    if(level1>1){
+    level2days=level2days+daysCalculator(todaydate,item.date)
     }
   })
 
   let level3days=0
   level3id.forEach((item,index)=>{
-    if(index>1){
-    level3days=level3days+daysCalculator(incomedate,item.date)
+    if(level1>1){
+    level3days=level3days+daysCalculator(todaydate,item.date)
     }
   })
 
   let level4days=0
   level4id.forEach((item,index)=>{
-    if(index>1){
-    level4days=level4days+daysCalculator(incomedate,item.date)
+    if(level1>1){
+    level4days=level4days+daysCalculator(todaydate,item.date)
     }
   })
 
   let level5days=0
   level5id.forEach((item,index)=>{
-    if(index>1){
-    level5days=level5days+daysCalculator(incomedate,item.date)
+    if(level1>1){
+    level5days=level5days+daysCalculator(todaydate,item.date)
     }
   })
 
@@ -283,7 +296,7 @@ const Dashboard = () => {
   const total_level4=level4days*daily_fixed_level4
   const total_level5=level5days*daily_fixed_level5
 
-  const total_income=total_level1+total_level2+total_level3+total_level4+total_level5+total_self+rewardincome-transactionincome
+  const total_income=onetime_total+total_level1+total_level2+total_level3+total_level4+total_level5+total_self+rewardincome-transactionincome
 
   return (
     <>
@@ -333,7 +346,12 @@ const Dashboard = () => {
    </aside>
 
 <div className="p-4 sm:ml-64">
+  <div className='flex justify-between'>
   <h1 className='text-2xl font-bold border-b-2 border-dashed border-gray-500 inline-block pb-1 mx-5 my-2'>Dashboard</h1>
+  <button onClick={()=>{navigate(-1)}} className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 mx-5 my-2 border border-red-500 hover:border-transparent rounded">
+  Log Out
+</button>
+  </div>
 <section className="flex flex-wrap justify-center text-gray-600 body-font overflow-none">
   <div className="container px-5 my-5 mx-auto">
     <div className="flex flex-wrap -m-4">
@@ -548,6 +566,12 @@ const Dashboard = () => {
 				<td className="border border-black p-2 font-semibold text-center">{total_self_days}</td>
 				<td className="border border-black p-2 font-semibold text-center">20</td>
 				<td className="border border-black p-2 font-semibold text-center">{total_self}</td>
+			</tr>
+      <tr>
+        <td className="border border-black p-2 font-semibold">One Time Income</td>
+				<td className="border border-black p-2 font-semibold text-center">-</td>
+				<td className="border border-black p-2 font-semibold text-center">-</td>
+				<td className="border border-black p-2 font-semibold text-center">{onetime_total}</td>
 			</tr>
       <tr>
         <td className="border border-black p-2 font-semibold">Rewards</td>

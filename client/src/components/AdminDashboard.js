@@ -41,9 +41,13 @@ const AdminDashboard = () => {
 
   return (
     <>
-    <div className='flex justify-center my-5'>
-    <h1 className='text-2xl font-bold border-b-2 border-dashed border-gray-500 inline-block'>Admin Dashboard</h1>
-    </div>
+    
+    <div className='flex justify-center'>
+  <h1 className='text-2xl font-bold border-b-2 border-dashed border-gray-500 inline-block pb-1 mx-5 my-5'>Admin Dashboard</h1>
+  <button onClick={()=>{navigate("/admin")}} className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white px-5 py-2.5 mx-5 my-5 border border-red-500 hover:border-transparent rounded">
+  Log Out
+</button>
+  </div>
     <div className='flex justify-start mx-10'>
     <button onClick={()=>{navigate("/transaction",{state:{showcomponent:admindash}})}} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Transaction</button>
     <button onClick={()=>{navigate("/reward",{state:{showcomponent:admindash}})}} type="button" className="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2 ">Reward</button>

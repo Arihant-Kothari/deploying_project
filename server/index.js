@@ -15,16 +15,26 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
 const db = mysql.createPool({
-    host:process.env.HOST,
-    user:process.env.USER,
-    password:process.env.PASSWORD,
-    database:process.env.DATABASE,
-});
+    host:"localhost",
+    user:"root",
+    password:"admin2245",
+    database:"amo_db",
+}
+);
+
+db.getConnection(function(err) {
+    if (err){
+      console.log(err)
+    }
+    else{
+     console.log("Connected to mysql server!");
+    }
+  })
 
 app.post('/api/login',(req,res)=>{
     const username=req.body.username;
     const password=req.body.password;
-    db.query("SELECT * FROM amo_db WHERE partner_id=? AND password=?",[username,password],
+    db.query("SELECT * FROM details WHERE partner_id=? AND password=?",[username,password],
     (err,result)=>{
         if(err){
             req.setEncoding({err:err})
@@ -38,7 +48,7 @@ app.post('/api/login',(req,res)=>{
             }
         }
     })
-}) 
+})
 app.post('/api/signup',(req,res)=>{
     const partnerid=req.body.partnerid;
     const password=req.body.password;
@@ -47,31 +57,31 @@ app.post('/api/signup',(req,res)=>{
     const sponsor=req.body.sponsor;
     const phone=req.body.phone;
     const address=req.body.address;
-    db.query("INSERT INTO amo_db (partner_id,password,name,joining_date,sponsor_id,phone,address) VALUES(?,?,?,?,?,?,?)",[partnerid,password,name,date,sponsor,phone,address])
+    db.query("INSERT INTO details (partner_id,password,name,joining_date,sponsor_id,phone,address) VALUES(?,?,?,?,?,?,?)",[partnerid,password,name,date,sponsor,phone,address])
 })
 
 app.get('/api/lastid',(req,res)=>{
-    db.query("SELECT partner_id FROM amo_db ORDER BY partner_id DESC LIMIT 1",(err,result)=>{
+    db.query("SELECT partner_id FROM details ORDER BY partner_id DESC LIMIT 1",(err,result)=>{
         res.send(result)
     })
 })
 
 app.post('/api/userdetail',(req,res)=>{
     const userid=req.body.userid;
-    db.query("SELECT name,partner_id,sponsor_id,joining_date,phone FROM amo_db WHERE partner_id=?",[userid],(err,result)=>{
+    db.query("SELECT name,partner_id,sponsor_id,joining_date,phone FROM details WHERE partner_id=?",[userid],(err,result)=>{
         res.send(result)
     })
 })
 
 app.get('/api/admin/dashboard',(req,res)=>{
-    db.query("SELECT * FROM amo_db",(err,result)=>{
+    db.query("SELECT * FROM details",(err,result)=>{
         res.send(result)
     })
 })
 
 app.post('/api/deleterow',(req,res)=>{
     const id=req.body.id;
-    db.query("DELETE FROM amo_db WHERE partner_id=?",[id])
+    db.query("DELETE FROM details WHERE partner_id=?",[id])
 })
 
 app.post('/api/editform',(req,res)=>{
@@ -80,11 +90,11 @@ app.post('/api/editform',(req,res)=>{
     const address=req.body.address;
     const partnerid=req.body.partnerid;
     const sponsor=req.body.sponsor;
-    db.query("UPDATE amo_db SET name=?,phone=?,address=?,sponsor_id=? WHERE partner_id=?",[name,phone,address,sponsor,partnerid])
+    db.query("UPDATE details SET name=?,phone=?,address=?,sponsor_id=? WHERE partner_id=?",[name,phone,address,sponsor,partnerid])
 })
 
 app.get('/api/dashboard',(req,res)=>{
-    db.query("SELECT name,partner_id,sponsor_id,joining_date FROM amo_db",(err,result)=>{
+    db.query("SELECT name,partner_id,sponsor_id,joining_date FROM details",(err,result)=>{
         res.send(result)
     })
 })
@@ -113,7 +123,7 @@ app.post('/api/reward',(req,res)=>{
     })
 })
 
-app.get('/api/transactionamo_db',(req,res)=>{
+app.get('/api/transactiondetails',(req,res)=>{
     db.query("SELECT * FROM transaction",(err,result)=>{
         res.send(result)
         if(err){
@@ -122,7 +132,7 @@ app.get('/api/transactionamo_db',(req,res)=>{
     })
 })
 
-app.get('/api/rewardamo_db',(req,res)=>{
+app.get('/api/rewarddetails',(req,res)=>{
     db.query("SELECT * FROM reward",(err,result)=>{
         res.send(result)
         if(err){
@@ -145,7 +155,19 @@ app.post('/api/gettransaction',(req,res)=>{
     })
 })
 
-const port=process.env.PORT || 3001
+//update this
+
+app.post('/api/deletereward',(req,res)=>{
+    const index=req.body.id;
+    db.query("DELETE FROM rewards WHERE index=?",[index])
+})
+
+app.post('/api/deletetransaction',(req,res)=>{
+    const index=req.body.id;
+    db.query("DELETE FROM transaction WHERE index=?",[index])
+})
+
+const port=3005
 
 app.listen(port,()=>{
     console.log(`server is running on port ${port}`)
