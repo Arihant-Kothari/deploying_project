@@ -39,10 +39,10 @@ const Reward = () => {
         getrewarddetail()
     })
 
-    const deleteRow=async(index)=>{
+    const deleteRow=async(number)=>{
         if(window.confirm("Are You Sure That You Want To Delete The Reward?")){
             const del = await axios.post(baseURL+"/deletereward",{
-                index:index,
+                number:number,
             })
             
         }
@@ -113,12 +113,13 @@ const Reward = () => {
 				<th className="border text-md border-black px-5 py-3 bg-blue-200">AMOUNT</th>
                 <th className="border text-md border-black px-5 py-3 bg-blue-200">DESCRIPTION</th>
 				<th className="border text-md border-black px-5 py-3 bg-blue-200">DATE</th>
+                <th className="border text-md border-black px-5 py-3 bg-blue-200">DELETE</th>
 			</tr>
 		</thead>
 		<tbody>
 			{rewarddata.map((item,index)=>{
                 return(
-                    <tr key={item.index}>
+                    <tr key={item.number}>
                         <td className='border text-md font-semibold border-black px-5 py-3 text-center'>{index+1}</td>
                         <td className='border text-md font-semibold border-black px-5 py-3 text-center'>{item.partner_id}</td>
                         <td className='border text-md font-semibold border-black px-5 py-3 text-center'>{item.amount}</td>
@@ -127,7 +128,7 @@ const Reward = () => {
                         <td className='border text-sm font-semibold border-black p-2'>
                             <div className='flex justify-evenly'>
                             <button onClick={()=>{
-                                deleteRow(item.index)
+                                deleteRow(item.number)
                             }} type="button" title="Delete" className="text-white bg-red-600 hover:bg-red-800 font-medium text-xs p-2 rounded">D</button>
                             </div>
                         </td>

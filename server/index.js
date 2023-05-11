@@ -158,13 +158,13 @@ app.post('/api/gettransaction',(req,res)=>{
 //update this
 
 app.post('/api/deletereward',(req,res)=>{
-    const index=req.body.id;
-    db.query("DELETE FROM rewards WHERE index=?",[index])
+    const number=req.body.number;
+    db.query("DELETE FROM rewards WHERE number=?",[number])
 })
 
 app.post('/api/deletetransaction',(req,res)=>{
-    const index=req.body.id;
-    db.query("DELETE FROM transaction WHERE index=?",[index])
+    const number=req.body.number;
+    db.query("DELETE FROM transaction WHERE number=?",[number])
 })
 
 const port=3005
