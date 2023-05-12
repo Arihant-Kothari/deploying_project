@@ -3,8 +3,6 @@ const app=express();
 const bodyParser=require("body-parser");
 const mysql=require("mysql2")
 const cors=require("cors");
-require("dotenv").config();
-
 
 app.get("/",(req,res)=>{
     res.send("hello express")
@@ -111,12 +109,36 @@ app.post('/api/transaction',(req,res)=>{
     })
 })
 
+app.post('/api/withdraw',(req,res)=>{
+    const partnerid=req.body.partnerid;
+    const amount=req.body.amount;
+    const date=req.body.date;
+    const remark=req.body.remark;
+    db.query("INSERT INTO withdraw (partner_id,amount,date,remark) VALUES(?,?,?,?)",[partnerid,amount,date,remark],(err,result)=>{
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
 app.post('/api/reward',(req,res)=>{
     const partnerid=req.body.partnerid;
     const amount=req.body.amount;
     const date=req.body.date;
     const remark=req.body.remark;
     db.query("INSERT INTO reward (partner_id,amount,date,remark) VALUES(?,?,?,?)",[partnerid,amount,date,remark],(err,result)=>{
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
+app.post('/api/acceptwithdraw',(req,res)=>{
+    const partner_id=req.body.partner_id;
+    const amount=req.body.amount;
+    const date=req.body.date;
+    const remark=req.body.remark;
+    db.query("INSERT INTO transaction (partner_id,amount,date,remark) VALUES(?,?,?,?)",[partner_id,amount,date,remark],(err,result)=>{
         if(err){
             console.log(err)
         }
@@ -134,6 +156,15 @@ app.get('/api/transactiondetails',(req,res)=>{
 
 app.get('/api/rewarddetails',(req,res)=>{
     db.query("SELECT * FROM reward",(err,result)=>{
+        res.send(result)
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
+app.get('/api/withdrawrequest',(req,res)=>{
+    db.query("SELECT * FROM withdraw",(err,result)=>{
         res.send(result)
         if(err){
             console.log(err)
@@ -159,7 +190,12 @@ app.post('/api/gettransaction',(req,res)=>{
 
 app.post('/api/deletereward',(req,res)=>{
     const number=req.body.number;
-    db.query("DELETE FROM rewards WHERE number=?",[number])
+    db.query("DELETE FROM reward WHERE number=?",[number])
+})
+
+app.post('/api/deletewithdraw',(req,res)=>{
+    const number=req.body.number;
+    db.query("DELETE FROM withdraw WHERE number=?",[number])
 })
 
 app.post('/api/deletetransaction',(req,res)=>{

@@ -101,7 +101,7 @@ const Transaction = () => {
     <button onClick={onDownload} className="mx-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-3 py-1 border border-blue-500 hover:border-transparent rounded">Export</button>
     </div>
     <div className='flex justify-center p-4'>
-    <table className="border border-black border-collapse px-2">
+    <table className="border border-black border-collapse px-2" ref={tableRef}>
 		<thead>
 			<tr>
                 <th className="border text-md border-black px-5 py-3 bg-blue-200"></th>

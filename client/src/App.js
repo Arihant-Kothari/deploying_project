@@ -10,6 +10,8 @@ import AdminLogin from './components/AdminLogin';
 import EditForm from './components/EditForm';
 import Transaction from './components/Transaction';
 import Reward from './components/Reward';
+import Withdraw from './components/Withdraw';
+import Withdrawrequest from './components/Withdrawrequest';
 const App = () => {
   return (
     <>
@@ -25,6 +27,8 @@ const App = () => {
       <Route exact path="/edit" element={<EditForm/>}/>
       <Route exact path="/transaction" element={<Transaction/>}/>
       <Route exact path="/reward" element={<Reward/>}/>
+      <Route exact path="/withdraw" element={<Withdraw/>}/>
+      <Route exact path="/withdrawrequest" element={<Withdrawrequest/>}/>
     </Routes>
     </BrowserRouter>
     </>

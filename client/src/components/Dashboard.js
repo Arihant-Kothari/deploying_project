@@ -8,6 +8,8 @@ const Dashboard = () => {
 
    const baseURL=process.env.REACT_APP_API_URL
 
+   const showform=true
+
    let location=useLocation();
    let navigate=useNavigate();
    let partnerid=location.state.partnerid.toUpperCase();
@@ -401,8 +403,13 @@ const Dashboard = () => {
 <div className='mx-5'>
   {updatestatus(lastjoining,level1)}
 </div>
+
+<div className='mx-5 mt-1'>
+<button onClick={()=>navigate("/withdraw",{state:{partnerid:partnerid,showform:showform}})} type="button" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Request Withdrawal</button>
+</div>
+
   <div className="mx-5">
-    <h2 className="mt-5 mb-2 text-2xl font-bold">
+    <h2 className="mt-2 mb-2 text-2xl font-bold">
       Daily Income Analysis
     </h2>
     <table className="border border-black border-collapse w-full">
