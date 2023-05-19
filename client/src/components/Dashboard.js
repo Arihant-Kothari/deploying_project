@@ -245,24 +245,6 @@ const Dashboard = () => {
       return total
     }
     else{
-      // if(level1id.length>0){
-      // let total=0
-      // for(let i=0;i<level1id.length;i++){
-      //     if(i==0){
-      //       let diffrence=daysCalculator(level1id[i].date,joiningdate)
-      //       if (diffrence>30){
-      //         diffrence=diffrence-30
-      //       }
-      //       total=total+diffrence
-      //     }
-      //     let diffrence = daysCalculator(level1id[i].date,level1id[i+1].date)
-      //     if (diffrence>30){
-      //       diffrence=30
-      //     }
-      //     total=total+diffrence
-      //   }
-      //   return total
-      // }
       let total=0
       let lastselfdate=""
       level1id.forEach((item)=>{
