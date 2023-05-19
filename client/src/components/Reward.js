@@ -129,7 +129,7 @@ const Reward = () => {
                             <div className='flex justify-evenly'>
                             <button onClick={()=>{
                                 deleteRow(item.number)
-                            }} type="button" title="Delete" className="text-white bg-red-600 hover:bg-red-800 font-medium text-xs p-2 rounded">D</button>
+                            }} type="button" title="Delete" className="text-white bg-red-600 hover:bg-red-800 font-medium text-xs p-2 rounded">Delete</button>
                             </div>
                         </td>
                     </tr>
