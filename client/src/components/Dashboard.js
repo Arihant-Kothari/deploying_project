@@ -245,52 +245,16 @@ const Dashboard = () => {
       return total
     }
     else{
-      // if(level1id.length>0){
-      // let total=0
-      // for(let i=0;i<level1id.length;i++){
-      //     if(i==0){
-      //       let diffrence=daysCalculator(level1id[i].date,joiningdate)
-      //       if (diffrence>30){
-      //         diffrence=diffrence-30
-      //       }
-      //       total=total+diffrence
-      //     }
-      //     let diffrence = daysCalculator(level1id[i].date,level1id[i+1].date)
-      //     if (diffrence>30){
-      //       diffrence=30
-      //     }
-      //     total=total+diffrence
-      //   }
-      //   return total
-      // }
+      let lastselfdate=level1id[1].date
       let total=0
-      let lastselfdate=""
-      level1id.forEach((item)=>{
-        if(level1id.indexOf(item)===0){
-          let diffrence = daysCalculator(joiningdate,item.date)
-          if (diffrence>30){
-            diffrence=30
-          }
-          total=total+diffrence
-          lastselfdate=item.date
-        }
-        else{
-        if(level1id.indexOf(item)===level1id.length-1){
-          let diffrence = daysCalculator(getCurrentDate(),item.date)
-          if (diffrence>30){
-            diffrence=30
-          }
-          total=total+diffrence
-        }
-
-          let diffrence=daysCalculator(lastselfdate,item.date)
-          if (diffrence>30){
-            diffrence=30
-          }
-          total=total+diffrence
-          lastselfdate=item.date
+      if(daysCalculator(joiningdate,lastselfdate)<30){
+        let diffrence=daysCalculator(joiningdate,lastselfdate)
+        total=total+diffrence
       }
-      })
+      else{
+        total=total+30
+      }
+      total=total+daysCalculator(getCurrentDate(),lastselfdate)
       return total
       }
   }
@@ -342,6 +306,19 @@ const Dashboard = () => {
   const total_level5=level5days*daily_fixed_level5
 
   const total_income=onetime_total+total_level1+total_level2+total_level3+total_level4+total_level5+total_self+rewardincome-transactionincome
+
+  const requestWithdrawButton=(income)=>{
+    if(income>1000){
+      return <button onClick={()=>navigate("/withdraw",{state:{partnerid:partnerid,showform:showform}})} type="button" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Request Withdrawal</button>
+    }
+    else{
+      return <button onClick={totalIncomeLess} type="button" class="disabled text-white bg-blue-400 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Request Withdrawal</button>
+    }
+  }
+
+  const totalIncomeLess=()=>{
+    window.alert("Your Income Must Be More Than 1000 In Order To Withdraw")
+  }
 
   return (
     <>
@@ -474,9 +451,7 @@ const Dashboard = () => {
   {updatestatus(lastjoining,level1)}
 </div>
 
-<div className='mx-5 mt-1'>
-<button onClick={()=>navigate("/withdraw",{state:{partnerid:partnerid,showform:showform}})} type="button" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Request Withdrawal</button>
-</div>
+<div className='mx-5 mt-1'>{requestWithdrawButton(total_income)}</div>
 
   <div className="mx-5">
     <h2 className="mt-2 mb-2 text-2xl font-bold">

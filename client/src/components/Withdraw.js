@@ -42,16 +42,23 @@ const Withdraw = () => {
         e.preventDefault();
 
         if(amount>0){
-        navigate(-1)
-        const trans= await axios.post(baseURL+"/withdraw",{
-            partnerid:partnerid,
-            amount:amount,
-            date:date,
-            remark:remark,
-        });
+            if(amount%1000===0){
+                navigate(-1)
+                window.alert(`Withdraw Of Amount: ${amount} Requested Successfully`)
+                const trans= await axios.post(baseURL+"/withdraw",{
+                    partnerid:partnerid,
+                    amount:amount,
+                    date:date,
+                    remark:remark,
+                });
+            }
+            else{
+                setMessage("Amount Must Be Multiple Of 1000")
+            }
+    
     }
-    else{
-        setMessage("Please Enter Amount")
+        else{
+            setMessage("Please Enter Amount")
     }
     }
 
@@ -71,7 +78,7 @@ const Withdraw = () => {
                       <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900">Remark/Description</label>
                       <input onChange={(e)=>{setRemark((e.target.value).toUpperCase())}} value={remark} type="text" name="id" id="id" className="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Add Description" required/>
 
-                      <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900">Amount</label>
+                      <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900">Amount <span className="text-gray-400 font-light ">- Multiple Of 1000</span></label>
                       <input onChange={(e)=>{setAmount(e.target.value)}} type="number" name="amount" id="amount" placeholder="Amount" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required/>
                       <div className="my-2">
                       <p className="text-red-600 font-semibold">{message}</p>
