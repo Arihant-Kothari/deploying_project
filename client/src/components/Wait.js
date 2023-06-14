@@ -6,7 +6,7 @@ const Wait = () => {
     let location=useLocation();
   return (
     <>
-    <div className="flex flex-col items-center justify-center mx-auto py-0 my-2 w-20 h-20">
+    <div className="flex flex-row items-center justify-center mx-auto py-0 my-2 w-20 h-20">
         <img src={logo}/>
     </div>
 <section className="text-gray-600 body-font flex flex-col justify-center items-center">

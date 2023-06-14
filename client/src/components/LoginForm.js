@@ -29,11 +29,11 @@ const LoginForm = () => {
     }
   return (
     <>
-    <div>
+    
     <div className="flex flex-col items-center justify-center mx-auto my-2 w-20 h-20">
         <img src={logo} alt=""/>
     </div>
-    <section className="my-2">
+    <section className="my-2 ">
   <div className="flex flex-col items-center justify-center px-6 py-0 mx-auto lg:py-0">
       <div className="w-full bg-white rounded-lg shadow border-2 border-gray-200 md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-5 md:space-y-7 sm:p-8">
@@ -55,7 +55,6 @@ const LoginForm = () => {
       </div>
   </div>
 </section>
-</div>
     </>
   )
 }

@@ -72,7 +72,7 @@ const SignupForm = () => {
         e.preventDefault();
         if(phone.length===10 && (sponsor.slice(0,2)==="AB" || sponsor.slice(0,2)==="ab") && name.length>3 && address.length>3)
         {
-        navigate("/success",{state:{partnerid:partnerid,password:password}})
+        navigate("/payment",{state:{partnerid:partnerid,password:password}})
         axios.post(baseURL+"/signup",{
             partnerid:partnerid,
             password:password,

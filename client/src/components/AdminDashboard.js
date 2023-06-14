@@ -52,6 +52,7 @@ const AdminDashboard = () => {
     <button onClick={()=>{navigate("/transaction",{state:{showcomponent:admindash}})}} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Transaction</button>
     <button onClick={()=>{navigate("/reward",{state:{showcomponent:admindash}})}} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Reward</button>
     <button onClick={()=>{navigate("/withdrawrequest",{state:{showcomponent:admindash}})}} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Withdraw Request</button>
+    <button onClick={()=>{navigate("/kycdetails",{state:{showcomponent:admindash}})}} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">KYC Details</button>
     <button onClick={onDownload} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-2.5 mr-2 mb-2 mx-auto border border-blue-500 hover:border-transparent rounded">Export</button>
     </div>
     

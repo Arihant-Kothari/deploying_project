@@ -1,14 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
-import {useNavigate,useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
 
 const Withdrawrequest = () => {
 
     const baseURL = process.env.REACT_APP_API_URL
 
-    let navigate=useNavigate();
     let location=useLocation();
+
+    const admindash=location.state.showcomponent;
 
     const[data,setData]=useState([])
 

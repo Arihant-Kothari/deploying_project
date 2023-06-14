@@ -30,6 +30,7 @@ const Dashboard = () => {
    const[reward,setReward]=useState([])
    const[transaction,setTransaction]=useState([])
 
+   const[showkycbutton,setShowkycbutton]=useState(true)
 
    const getUserDetail = async()=>{
     const res =await axios.post(baseURL+"/userdetail",{
@@ -40,6 +41,18 @@ const Dashboard = () => {
          setSponsor(result.data[0].sponsor_id)
          setPhone(result.data[0].phone)
       });
+   }
+
+   const kycbutton= async ()=>{
+    const result= await axios.get(baseURL+"/kycid")
+    console.log(result.data)
+
+    for(let i=0;i<result.data.length;i++){
+      if(result.data[i].partnerid === partnerid){
+        setShowkycbutton(false)
+        break;
+      }
+    }
    }
 
    const getdata=async()=>{
@@ -119,6 +132,7 @@ const Dashboard = () => {
     getUserDetail()
     getreward()
     gettransaction()
+    kycbutton()
    },[])
 
    const daysCalculator=(StartDate, EndDate)=> {
@@ -316,6 +330,14 @@ const Dashboard = () => {
     }
   }
 
+  const KYCButton=(temp)=>{
+    if(temp === true){
+      return <button onClick={()=>navigate("/kyc",{state:{partnerid:partnerid,showform:showform}})} type="button" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Update KYC Details</button>
+    }
+  }
+
+  console.log(showkycbutton)
+
   const totalIncomeLess=()=>{
     window.alert("Your Income Must Be More Than 1000 In Order To Withdraw")
   }
@@ -451,7 +473,11 @@ const Dashboard = () => {
   {updatestatus(lastjoining,level1)}
 </div>
 
-<div className='mx-5 mt-1'>{requestWithdrawButton(total_income)}</div>
+<div className='flex flex-col mx-5 mt-1 sm:flex-row'>
+<div>{requestWithdrawButton(total_income)}</div>
+<div>{KYCButton(showkycbutton)}</div>
+</div>
+
 
   <div className="mx-5">
     <h2 className="mt-2 mb-2 text-2xl font-bold">

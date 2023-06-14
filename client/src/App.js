@@ -12,6 +12,9 @@ import Transaction from './components/Transaction';
 import Reward from './components/Reward';
 import Withdraw from './components/Withdraw';
 import Withdrawrequest from './components/Withdrawrequest';
+import KYC from './components/KYC';
+import KYCDetails from './components/KYCDetails';
+import Payment from './components/Payment';
 const App = () => {
   return (
     <>
@@ -29,6 +32,9 @@ const App = () => {
       <Route exact path="/reward" element={<Reward/>}/>
       <Route exact path="/withdraw" element={<Withdraw/>}/>
       <Route exact path="/withdrawrequest" element={<Withdrawrequest/>}/>
+      <Route exact path="/kyc" element={<KYC/>}/>
+      <Route exact path="/kycdetails" element={<KYCDetails/>}/>
+      <Route exact path="/payment" element={<Payment/>}/>
     </Routes>
     </BrowserRouter>
     </>

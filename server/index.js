@@ -186,8 +186,6 @@ app.post('/api/gettransaction',(req,res)=>{
     })
 })
 
-//update this
-
 app.post('/api/deletereward',(req,res)=>{
     const number=req.body.number;
     db.query("DELETE FROM reward WHERE number=?",[number])
@@ -201,6 +199,44 @@ app.post('/api/deletewithdraw',(req,res)=>{
 app.post('/api/deletetransaction',(req,res)=>{
     const number=req.body.number;
     db.query("DELETE FROM transaction WHERE number=?",[number])
+})
+
+app.post('/api/kyc',(req,res)=>{
+    const partnerid=req.body.partnerid;
+    const name=req.body.name;
+    const address=req.body.address;
+    const number=req.body.number;
+    const upinumber=req.body.upinumber;
+    const accountnumber=req.body.accountnumber;
+    const ifsc=req.body.ifsc;
+    db.query("INSERT INTO kycdetails (partnerid,name,address,number,upinumber,accountnumber,ifsc) VALUES(?,?,?,?,?,?,?)",[partnerid,name,address,number,upinumber,accountnumber,ifsc],(err,result)=>{
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
+app.get('/api/kycdetails',(req,res)=>{
+    db.query("SELECT * FROM kycdetails",(err,result)=>{
+        res.send(result)
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
+app.get('/api/kycid',(req,res)=>{
+    db.query("SELECT partnerid FROM kycdetails",(err,result)=>{
+        res.send(result)
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
+app.post('/api/deletekyc',(req,res)=>{
+    const ind=req.body.ind;
+    db.query("DELETE FROM kycdetails WHERE ind=?",[ind])
 })
 
 const port=3005

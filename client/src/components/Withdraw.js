@@ -2,7 +2,7 @@ import React,{useState,useEffect,useRef} from 'react'
 import logo from '../assets/logo.png'
 import axios from 'axios'
 import { useNavigate,useLocation } from 'react-router-dom'
-import { useDownloadExcel } from 'react-export-table-to-excel';
+
 const Withdraw = () => {
 
     const baseURL=process.env.REACT_APP_API_URL
