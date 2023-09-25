@@ -322,7 +322,7 @@ const Dashboard = () => {
   const total_income=onetime_total+total_level1+total_level2+total_level3+total_level4+total_level5+total_self+rewardincome-transactionincome
 
   const requestWithdrawButton=(income)=>{
-    if(income>1000){
+    if(income>299){
       return <button onClick={()=>navigate("/withdraw",{state:{partnerid:partnerid,showform:showform}})} type="button" class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-md px-5 py-2.5 mr-2 mb-2">Request Withdrawal</button>
     }
     else{
@@ -339,7 +339,7 @@ const Dashboard = () => {
   console.log(showkycbutton)
 
   const totalIncomeLess=()=>{
-    window.alert("Your Income Must Be More Than 1000 In Order To Withdraw")
+    window.alert("Your Income Must Be More Than 300 In Order To Withdraw")
   }
 
   return (
@@ -642,7 +642,7 @@ const Dashboard = () => {
       <tr>
         <td className="border border-black p-2 font-semibold">Self Income</td>
 				<td className="border border-black p-2 font-semibold text-center">{total_self_days}</td>
-				<td className="border border-black p-2 font-semibold text-center">20</td>
+				<td className="border border-black p-2 font-semibold text-center">10</td>
 				<td className="border border-black p-2 font-semibold text-center">{total_self}</td>
 			</tr>
       <tr>
