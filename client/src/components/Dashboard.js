@@ -166,26 +166,26 @@ const Dashboard = () => {
   let no_of_days=daysCalculator(joiningdate,getCurrentDate())
   
   //one time
-  let onetime_fixed_level1=50
-  let onetime_fixed_level2=20
-  let onetime_fixed_level3=10
-  let onetime_fixed_level4=5
-  let onetime_fixed_level5=5
+  let onetime_fixed_level1=10
+  // let onetime_fixed_level2=20
+  // let onetime_fixed_level3=10
+  // let onetime_fixed_level4=5
+  // let onetime_fixed_level5=5
 
   let onetime_level1=level1*onetime_fixed_level1
-  let onetime_level2=level2*onetime_fixed_level2
-  let onetime_level3=level3*onetime_fixed_level3
-  let onetime_level4=level4*onetime_fixed_level4
-  let onetime_level5=level5*onetime_fixed_level5
+  // let onetime_level2=level2*onetime_fixed_level2
+  // let onetime_level3=level3*onetime_fixed_level3
+  // let onetime_level4=level4*onetime_fixed_level4
+  // let onetime_level5=level5*onetime_fixed_level5
 
-  let onetime_total=onetime_level1+onetime_level2+onetime_level3+onetime_level4+onetime_level5
+  let onetime_total=onetime_level1
 
   //daily
-  let daily_fixed_level1=4
-  let daily_fixed_level2=3
-  let daily_fixed_level3=2
-  let daily_fixed_level4=1
-  let daily_fixed_level5=1
+  let daily_fixed_level1=2
+  let daily_fixed_level2=1
+  let daily_fixed_level3=1
+  let daily_fixed_level4=0.5
+  let daily_fixed_level5=0.25
 
   let daily_level1=level1*daily_fixed_level1
   let daily_level2=level2*daily_fixed_level2
@@ -205,19 +205,19 @@ const Dashboard = () => {
     if(level1<2){
       let selfincome=0
       if(daysCalculator(joiningdate,getCurrentDate())<30){
-        selfincome=20
+        selfincome=10
       }
       return selfincome
     }
     else{
-      let selfincome=20
+      let selfincome=10
       return selfincome
     }
   }
   const selfincome=getselfincome()
 
   const getDaily=(temp)=>{
-    if (temp<20){
+    if (temp<10){
       let x=0
       return x
     }
@@ -560,7 +560,7 @@ const Dashboard = () => {
 				<td className="border border-black p-2 text-center font-semibold">{onetime_fixed_level1}</td>
 				<td className="border border-black p-2 text-center font-semibold">{onetime_level1}</td>
 			</tr>
-			<tr>
+			{/* <tr>
         <td className="border border-black p-2 font-semibold">Level 2</td>
 				<td className="border border-black p-2 text-center font-semibold">{level2}</td>
 				<td className="border border-black p-2 text-center font-semibold">{onetime_fixed_level2}</td>
@@ -583,7 +583,7 @@ const Dashboard = () => {
 				<td className="border border-black p-2 text-center font-semibold">{level5}</td>
 				<td className="border border-black p-2 text-center font-semibold">{onetime_fixed_level5}</td>
 				<td className="border border-black p-2 text-center font-semibold">{onetime_level5}</td>
-			</tr>
+			</tr> */}
       <tr>
         <td className="px-5 p-2 bg-blue-200 font-semibold">Total</td>
         <td className='bg-blue-200'></td>
