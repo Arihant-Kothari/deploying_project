@@ -9,8 +9,8 @@ const Withdraw = () => {
   let location = useLocation();
   let navigate = useNavigate();
 
-  const partnerid = "location.state.partnerid";
-  const showform = "location.state.showform";
+  const partnerid = location.state.partnerid;
+  const showform = location.state.showform;
 
   const [amount, setAmount] = useState(100);
   const [date, setDate] = useState("");
