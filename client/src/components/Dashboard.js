@@ -275,7 +275,7 @@ const Dashboard = () => {
 
   let total_self_days=totalselfdays()
 
-  let total_self=total_self_days*20
+  let total_self=total_self_days*10
 
   let todaydate=getCurrentDate()
   let level1days=0
