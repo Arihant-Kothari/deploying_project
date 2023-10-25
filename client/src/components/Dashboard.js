@@ -11,7 +11,7 @@ const Dashboard = () => {
 
    let location=useLocation();
    let navigate=useNavigate();
-   let partnerid=location.state.partnerid.toUpperCase();
+   let partnerid="location.state.partnerid.toUpperCase()";
 
    const[name,setName]=useState("")
    const[joiningdate,setJoiningdate]=useState("")
@@ -342,6 +342,9 @@ const Dashboard = () => {
     window.alert("Your Income Must Be More Than 300 In Order To Withdraw")
   }
 
+  let total_points=Math.round((level1)+(level2/4)+(level3/8)+(level4/16)+(level5/32))
+  let withdraw_limit=total_points*400
+
   return (
     <>
     
@@ -423,6 +426,9 @@ const Dashboard = () => {
   Log Out
 </button>
   </div>
+  <div>
+    <h2 className='text-xl font-bold mx-6 mt-5'>Welcome To AMO BUSINESS!</h2>
+  </div>
 <section className="flex flex-wrap justify-center text-gray-600 body-font overflow-none">
   <div className="container px-5 my-5 mx-auto">
     <div className="flex flex-wrap -m-4">
@@ -463,6 +469,26 @@ const Dashboard = () => {
           </div>
           <div className="flex-grow">
             <p className="font-bold text-gray-800 text-4xl">{no_of_days}</p>
+          </div>
+        </div>
+      </div>
+      <div className="p-4 md:w-1/4">
+      <div className="flex rounded-lg bg-gradient-to-bl from-sky-300 to-cyan-200 p-8 flex-col">
+          <div className="flex items-center mb-3">
+            <h2 className="text-gray-600 text-lg font-bold">Total Points</h2>
+          </div>
+          <div className="flex-grow">
+            <p className="font-bold text-gray-800 text-4xl">{total_points}</p>
+          </div>
+        </div>
+      </div>
+      <div className="p-4 md:w-1/4">
+        <div className="flex rounded-lg bg-gradient-to-bl from-sky-300 to-cyan-200 p-8 flex-col">
+          <div className="flex items-center mb-3">
+            <h2 className="text-gray-600 text-lg font-bold">Withdraw Limit</h2>
+          </div>
+          <div className="flex-grow">
+            <p className="font-bold text-gray-800 text-4xl">{withdraw_limit}</p>
           </div>
         </div>
       </div>
